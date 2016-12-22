@@ -19,6 +19,7 @@ import java.util.List;
 public enum OpenAccExecutionMode {
   NONE,
   VECTOR,
+  GANG,
   VECTOR_GANG,
   GANG_VECTOR;
   // TODO refine it
@@ -34,6 +35,10 @@ public enum OpenAccExecutionMode {
       return NONE;
     }
     switch(value) {
+      case OpenAccConfiguration.EXEC_MODE_NONE:
+        return NONE;
+      case OpenAccConfiguration.EXEC_MODE_GANG:
+        return GANG;
       case OpenAccConfiguration.EXEC_MODE_VECTOR:
         return VECTOR;
       case OpenAccConfiguration.EXEC_MODE_VECTOR_GANG:

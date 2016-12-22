@@ -17,6 +17,8 @@ public class OpenAccConfiguration {
   private static final String OPENACC_VECTOR_LENGTH = "openacc_vector_length";
   private static final String OPENACC_EXECUTION_MODE = "openacc_execution_mode";
 
+  public static final String EXEC_MODE_NONE = "none";
+  public static final String EXEC_MODE_GANG = "gang";
   public static final String EXEC_MODE_VECTOR = "vector";
   public static final String EXEC_MODE_VECTOR_GANG = "vector_gang";
   public static final String EXEC_MODE_GANG_VECTOR = "gang_vector";
