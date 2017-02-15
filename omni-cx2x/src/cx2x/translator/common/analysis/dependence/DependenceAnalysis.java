@@ -8,7 +8,9 @@ package cx2x.translator.common.analysis.dependence;
 import cx2x.xcodeml.xnode.Xcode;
 import cx2x.xcodeml.xnode.Xnode;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * This class hold methods to help analysis of loop dependencies on XcodeML/F
@@ -74,6 +76,16 @@ public class DependenceAnalysis {
           }
         }
       }
+    }
+
+    List<Xnode> vars = body.matchAll(Xcode.VAR);
+    Set<String> uniqueVar = new HashSet<>();
+    for(Xnode var : vars) {
+      uniqueVar.add(var.value());
+    }
+
+    for(String var : uniqueVar){
+      System.out.println(var);
     }
 
   }
