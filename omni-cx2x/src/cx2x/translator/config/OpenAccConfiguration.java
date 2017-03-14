@@ -37,6 +37,7 @@ public class OpenAccConfiguration {
   /**
    * Constructs a OpenAccConfiguration object holding OpenACC configuration
    * information.
+   *
    * @param parameters Map of all configuration parameters.
    */
   public OpenAccConfiguration(Map<String, String> parameters) {
@@ -84,9 +85,10 @@ public class OpenAccConfiguration {
 
   /**
    * Get the OpenACC execution mode value.
+   *
    * @return default execution mode value. NONE if not defined.
    */
-  public OpenAccExecutionMode getMode(){
+  public OpenAccExecutionMode getMode() {
     return _mode;
   }
 

@@ -1048,7 +1048,7 @@ public class XnodeUtil {
    * @throws IllegalTransformationException If bound cannot be duplicated.
    */
   public static Xnode duplicateBound(Xnode baseBound, XcodeML xcodemlDst,
-                                      XcodeML xcodemlSrc)
+                                     XcodeML xcodemlSrc)
       throws IllegalTransformationException
   {
     if(baseBound.opcode() != Xcode.LOWERBOUND
@@ -1119,4 +1119,55 @@ public class XnodeUtil {
     }
   }
 
+  /**
+   * Remove the "pure" attribute from the function type. Issue a warning.
+   *
+   * @param fctDef  Function definition node where the pure attribute must be
+   *                removed.
+   * @param fctType Function type node where the pure attribute must be
+   *                removed.
+   * @return True if the PURE specifier had to be removed false otherwise.
+   */
+  public static boolean removePure(Xnode fctDef, Xnode fctType) {
+    if(fctType.opcode() != Xcode.FFUNCTIONTYPE ||
+        fctDef.opcode() != Xcode.FFUNCTIONDEFINITION)
+    {
+      return false;
+    }
+
+    if(fctType.getBooleanAttribute(Xattr.IS_PURE)) {
+      fctType.setAttribute(Xattr.IS_PURE, Xname.FALSE);
+      return true;
+    }
+    return false;
+  }
+
+  /**
+   * Check whether the end node is a direct sibling of the start node. If other
+   * nodes are between the two nodes and their opcode is not listed in the
+   * skippedNodes list, the nodes are not direct siblings.
+   *
+   * @param start        First node in the tree.
+   * @param end          Node to be check to be a direct sibling.
+   * @param skippedNodes List of opcode that are allowed between the two nodes.
+   * @return True if the nodes are direct siblings.
+   */
+  public static boolean isDirectSibling(Xnode start, Xnode end, List<Xcode> skippedNodes) {
+    if(start == null || end == null) {
+      return false;
+    }
+
+    Xnode nextSibling = start.nextSibling();
+    while(nextSibling != null) {
+      if(nextSibling.equals(end)) {
+        return true;
+      }
+      if(skippedNodes.contains(nextSibling.opcode())) {
+        nextSibling = nextSibling.nextSibling();
+      } else {
+        return false;
+      }
+    }
+    return false;
+  }
 }
