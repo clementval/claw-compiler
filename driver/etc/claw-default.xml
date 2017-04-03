@@ -14,6 +14,10 @@
     <!-- Specify the order of generation of clauses when nested loops are generated -->
     <!-- possible values are vector_gang, gang_vector, vector, gang, none -->
     <parameter key="openacc_execution_mode" value="vector_gang"/>
+
+    <!-- Data dependencies analysis options -->
+    <parameter key="dda_automatic_loop_fusion" value="gpu"/> <!-- Possible values: cpu, gpu, all, none -->
+
   </global>
   <!-- Transformation groups -->
   <groups>
