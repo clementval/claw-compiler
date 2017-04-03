@@ -5,6 +5,9 @@
 
 package cx2x.translator.common;
 
+import cx2x.translator.language.helper.accelerator.AcceleratorDirective;
+import cx2x.translator.language.helper.accelerator.AcceleratorGenerator;
+import cx2x.translator.language.helper.target.Target;
 import xcodeml.util.XmOption;
 
 import java.util.*;
@@ -103,4 +106,36 @@ public class Utility {
     }
     return false;
   }
+
+  /**
+   * Print a string with a specified indentation at the beginning.
+   * @param indent Number of spaces to indent.
+   * @param value  Text value to be printed.
+   */
+  public static void printWithIdent(int indent, String value){
+    for(int i = 0; i < indent; ++i) {
+      System.out.print(" ");
+    }
+    System.out.println(value);
+  }
+
+  /**
+   * Get a formatted suffix for the CLAW module file including the directive
+   * and target of the current transformation.
+   *
+   * .<directive>.<target>.claw
+   *
+   * @param target    The current transformation target.
+   * @param directive The current accelerator directive used in transformation.
+   * @return A formatted string for the CLAW module file name.
+   */
+  public static String formattedModuleFilePrefix(Target target,
+                                                 AcceleratorDirective directive)
+  {
+    return "." + directive.toString() +
+        "." + target.toString() +
+        ClawConstant.CLAW_MOD_SUFFIX;
+  }
+
+
 }
